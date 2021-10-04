@@ -6,8 +6,9 @@
     </head>
     <body>
        <h1>Blog Name</h1>
-       <form action='/posts' method="POST">
+       <form action="/posts/{{ $post->id }}" method="POST">
            @csrf
+           @method('PUT')
            <div class="title">
                <h2>Title</h2>
                <input type="text" name="post[title]" placeholder="タイトル" value="{{ old('post.title') }}"/>
@@ -18,9 +19,9 @@
                <textarea name="post[body]" placeholder="今日も一日お疲れ様でした">{{ old('post.body') }}</textarea>
                <p class="body_error" style="color:red">{{ $errors->first('post.body') }}</p>
            </div>
-           <input type="submit" value="保存"/>
+           <input type="submit" value="更新"/>
        </form>
-       <div class="back">[<a href="/">戻る</a>]</div>
+       <div class="back">[<a href="/posts/{{ $post->id }}">戻る</a>]</div>
     </body>
 </html>
 
