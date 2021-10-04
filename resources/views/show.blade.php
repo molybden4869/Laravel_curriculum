@@ -10,6 +10,12 @@
     <body>
        <h1>Blog Name</h1>
        <p class="edit">[<a href="/posts/{{ $post->id }}/edit">編集</a>]</div>
+       <form action="/posts/{{ $post->id }}" id="form_delete" method="post">
+            @csrf
+            @method('DELETE')
+            <input type="submit" style="display:none">
+            <p class="delete">[<span onclick="return deletePost(this);">削除</span>]</p>
+       </form>
             <div class='post'>
                 <h2 class='title'>{{ $post->title }}</h2>
                 <p class='body'>{{ $post->body }}</p>
@@ -18,5 +24,12 @@
             <div class="back">
                 <a href="/">戻る</a>
             </div>
+            <script>
+                function deletePost(e) {
+                    if (confirm('本当に削除しますか？')) {
+                        document.getElementById('form_delete').submit();
+                    }
+                }
+            </script>
     </body>
 </html>
